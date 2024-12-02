@@ -18,11 +18,11 @@ page 50106 "Policy List"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Policy Category field.', Comment = '%';
                 }
-                field("Code"; Rec."Code")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Policy Code field.', Comment = '%';
-                }
+                // field("Code"; Rec."Code")
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the value of the Policy Code field.', Comment = '%';
+                // }
                 field(Description; Rec.Description)
                 {
                     ApplicationArea = All;
