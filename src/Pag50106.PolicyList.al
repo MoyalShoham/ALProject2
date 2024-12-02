@@ -5,6 +5,7 @@ page 50106 "Policy List"
     PageType = List;
     SourceTable = "Policy Table";
     UsageCategory = Lists;
+    CardPageId = "Policy Card";
 
     layout
     {
@@ -37,31 +38,31 @@ page 50106 "Policy List"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Policy Price field.', Comment = '%';
                 }
-                field(SystemCreatedAt; Rec.SystemCreatedAt)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the SystemCreatedAt field.', Comment = '%';
-                }
-                field(SystemCreatedBy; Rec.SystemCreatedBy)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the SystemCreatedBy field.', Comment = '%';
-                }
-                field(SystemId; Rec.SystemId)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the SystemId field.', Comment = '%';
-                }
-                field(SystemModifiedAt; Rec.SystemModifiedAt)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the SystemModifiedAt field.', Comment = '%';
-                }
-                field(SystemModifiedBy; Rec.SystemModifiedBy)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the SystemModifiedBy field.', Comment = '%';
-                }
+                // field(SystemCreatedAt; Rec.SystemCreatedAt)
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the value of the SystemCreatedAt field.', Comment = '%';
+                // }
+                // field(SystemCreatedBy; Rec.SystemCreatedBy)
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the value of the SystemCreatedBy field.', Comment = '%';
+                // }
+                // field(SystemId; Rec.SystemId)
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the value of the SystemId field.', Comment = '%';
+                // }
+                // field(SystemModifiedAt; Rec.SystemModifiedAt)
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the value of the SystemModifiedAt field.', Comment = '%';
+                // }
+                // field(SystemModifiedBy; Rec.SystemModifiedBy)
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the value of the SystemModifiedBy field.', Comment = '%';
+                // }
             }
         }
     }
@@ -73,7 +74,7 @@ page 50106 "Policy List"
             action(OpenPolicyCard)
             {
                 Caption = 'Open Policy Card';
-                Image = Information;
+                // Image = Information;
 
                 trigger OnAction()
                 var
