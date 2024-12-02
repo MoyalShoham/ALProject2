@@ -1,4 +1,4 @@
-table 50102 PolicyTable
+table 50102 "Policy Table"
 {
     Caption = 'Policy Table';
     DataClassification = ToBeClassified;
@@ -41,33 +41,4 @@ table 50102 PolicyTable
             Clustered = true;
         }
     }
-
-    // fieldgroups
-    // {
-    //     // Add changes to field groups here
-    // }
-
-    // var
-    //     myInt: Integer;
-
-    // trigger OnInsert()
-    // begin
-
-    // end;
-
-    // trigger OnModify()
-    // begin
-
-    // end;
-
-    // trigger OnDelete()
-    // begin
-
-    // end;
-
-    // trigger OnRename()
-    // begin
-
-    // end;
-
 }
