@@ -14,4 +14,8 @@ enum 50108 Categories
     {
         Caption = 'Travels';
     }
+    value(3; Others)
+    {
+        Caption = 'Others';
+    }
 }
