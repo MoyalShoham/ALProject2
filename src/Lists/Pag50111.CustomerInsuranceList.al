@@ -10,6 +10,10 @@ page 50111 "Customer Insurance List"
         {
             repeater(General)
             {
+                field("Line No."; Rec."Line No.")
+                {
+                    ApplicationArea = All;
+                }
                 field("Customer No."; Rec."Customer No.")
                 {
                     ApplicationArea = All;
