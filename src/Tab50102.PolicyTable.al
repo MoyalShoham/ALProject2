@@ -43,4 +43,19 @@ table 50102 "Policy Table"
             Clustered = true;
         }
     }
+
+
+    trigger OnInsert()
+    var
+        LastItem: Record "Policy Table";
+        NewCode: Code[20];
+    begin
+        if Rec."Code" = '' then begin
+            if LastItem.FindLast then begin
+                NewCode := IncSTR(LastItem."Code");
+                Rec."Code" := NewCode;
+            end else
+                Rec."Code" := '000001';
+        end;
+    end;
 }
