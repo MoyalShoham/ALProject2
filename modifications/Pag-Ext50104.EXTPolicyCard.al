@@ -2,7 +2,6 @@ pageextension 50104 "EXT Policy Card" extends "Item Card"
 {
     layout
     {
-
         addlast(Item)
         {
             field(PolicyType; Rec.PolicyType)
