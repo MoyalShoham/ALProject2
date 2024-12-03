@@ -22,11 +22,13 @@ table 50102 "Policy Table"
             Caption = 'Policy Price';
             DataClassification = ToBeClassified;
         }
+
         field(4; Period; Integer)
         {
             Caption = 'Policy Period';
             DataClassification = ToBeClassified;
         }
+
         field(5; Category; Enum Categories)
         {
             Caption = 'Policy Category';
