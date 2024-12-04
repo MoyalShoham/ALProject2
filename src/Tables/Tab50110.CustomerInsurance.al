@@ -38,7 +38,6 @@ table 50110 "Customer Insurance"
             trigger OnValidate()
             var
                 PolicyRec: Record "Policy Table";
-                PeriodInDays: Integer;
             begin
                 // Ensure Start Date is valid
                 if Rec."Start Date" <> 0D then begin
@@ -46,22 +45,24 @@ table 50110 "Customer Insurance"
                     if PolicyRec.Get(Rec."Policy Code") then begin
                         // Ensure the Period value is greater than zero
                         if PolicyRec.Period > 0 then begin
-                            // Convert Period (in years) to days (365 days per year)
-                            PeriodInDays := PolicyRec.Period * 365;
-
-                            // Calculate the End Date based on Start Date and Period in days
-                            Rec."End Date" := CALCDATE('+' + Format(PeriodInDays) + 'D', Rec."Start Date");
+                            // Adding Period (in days) to the Start Date
+                            Message('%1', PolicyRec."Period");
+                            Rec."End Date" := Rec."Start Date" + PolicyRec.Period;
                         end else begin
+                            // If the period is zero or invalid
                             Error('Period from Policy Table should be greater than zero.');
                         end;
                     end else begin
-                        Error('Policy not found for Code: %1', Rec."Policy Code");  // Improved error message
+                        // If the Policy Code doesn't exist in the Policy Table
+                        Error('Policy not found for Code: %1', Rec."Policy Code");
                     end;
                 end else begin
+                    // If Start Date is not set
                     Error('Start Date cannot be empty.');
                 end;
             end;
         }
+
 
 
         field(6; "End Date"; Date)
