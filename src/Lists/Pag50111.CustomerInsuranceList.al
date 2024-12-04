@@ -1,26 +1,24 @@
 page 50111 "Customer Insurance List"
 {
+    Caption = 'Customer Insurance List';
     PageType = ListPart;
     SourceTable = "Customer Insurance";
-    Caption = 'Customer Insurances';
-    AutoSplitKey = true;
-    DelayedInsert = true;
-    LinksAllowed = false;
-    MultipleNewLines = true;
-
-    // The SourceTableView is removed, as it will be applied dynamically.
-    // This was causing the issue as the Policy Code filter cannot be set like this directly.
+    // ApplicationArea = All;
 
     layout
     {
         area(Content)
         {
-            repeater(General)
+            repeater(Group)
             {
+                // field("Description"; Rec."")
+                // field("Policy Code"; Rec."Policy Code")
+                // {
+                //     ApplicationArea = All;
+                // }
                 field("Line No."; Rec."Line No.")
                 {
                     ApplicationArea = All;
-                    Editable = false;
                 }
                 field("Customer No."; Rec."Customer No.")
                 {
@@ -38,18 +36,43 @@ page 50111 "Customer Insurance List"
                 {
                     ApplicationArea = All;
                 }
+                // field("Period"; Rec.Period)
+                // {
+                //     ApplicationArea = All;
+                // }
             }
         }
     }
 
-    // Trigger to apply dynamic filtering based on Policy Code from the Parent Page
-    trigger OnOpenPage()
-    var
-        ParentPolicyCardPage: Page "Policy Card";
-        CustomerInsuranceRec: Record "Customer Insurance";
-    begin
-        // Set the filter for Customer Insurance records based on the Policy Code of the Parent Policy
-        CustomerInsuranceRec.SetRange("Policy Code", Rec."Policy Code"); // Apply the filter dynamically
-        CurrPage.SetTableView(CustomerInsuranceRec); // Apply the filtered table view to the list part
-    end;
+    actions
+    {
+        area(Processing)
+        {
+            action(NewLine)
+            {
+                Caption = 'New Line';
+                Image = New;
+                trigger OnAction()
+                var
+                    CustomerInsuranceRec: Record "Customer Insurance";
+                begin
+                    // Insert a new line and set the Line No.
+                    CustomerInsuranceRec.Init();
+                    CustomerInsuranceRec."Policy Code" := Rec."Policy Code"; // Set Policy Code
+                    CustomerInsuranceRec.Insert();
+                end;
+            }
+        }
+    }
+
+    // trigger OnOpenPage()
+    // var
+    //     CustomerInsuranceRec: Record "Customer Insurance";
+    // begin
+    //     // Filter Customer Insurance records by the current Policy Code
+    //     CustomerInsuranceRec.SetRange("Policy Code", Rec."Policy Code");
+
+    //     // Apply the filter dynamically on the page
+    //     CurrPage.SetTableView(CustomerInsuranceRec);
+    // end;
 }

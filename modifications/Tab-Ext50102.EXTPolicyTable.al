@@ -14,7 +14,7 @@ tableextension 50102 "EXT Item Table" extends "Item"
         {
             Caption = 'Policy Description';
             FieldClass = FlowField;
-            CalcFormula = lookup("Policy Table"."Description" where("Code" = field(PolicyType)));
+            CalcFormula = lookup("Policy Table"."Description" where("Policy Code" = field(PolicyType)));
         }
     }
 

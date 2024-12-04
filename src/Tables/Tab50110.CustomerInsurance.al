@@ -22,6 +22,7 @@ table 50110 "Customer Insurance"
         {
             Caption = 'Customer No.';
             DataClassification = ToBeClassified;
+            TableRelation = Customer;
         }
 
         field(4; "Customer Name"; Text[100])
@@ -39,15 +40,13 @@ table 50110 "Customer Insurance"
             var
                 PolicyRec: Record "Policy Table";
             begin
-                // Ensure Start Date is valid
                 if Rec."Start Date" <> 0D then begin
                     // Find the policy record related to the given Policy Code
                     if PolicyRec.Get(Rec."Policy Code") then begin
                         // Ensure the Period value is greater than zero
                         if PolicyRec.Period > 0 then begin
-                            // Adding Period (in days) to the Start Date
-                            Message('%1', PolicyRec."Period");
-                            Rec."End Date" := Rec."Start Date" + PolicyRec.Period;
+                            // Using CalcDate function to add the period (in days) to the Start Date
+                            Rec."End Date" := CalcDate('+%1D', Rec."Start Date" + PolicyRec.Period);
                         end else begin
                             // If the period is zero or invalid
                             Error('Period from Policy Table should be greater than zero.');
@@ -60,10 +59,9 @@ table 50110 "Customer Insurance"
                     // If Start Date is not set
                     Error('Start Date cannot be empty.');
                 end;
+
             end;
         }
-
-
 
         field(6; "End Date"; Date)
         {
@@ -100,9 +98,8 @@ table 50110 "Customer Insurance"
             Line := LastCustomerInsuranceRec."Line No." + 1
         else
             // If no records exist for this Policy Code, start from 0
-            Line := 0;
+            Line := 1;
 
-        Rec."Line No." := Line;
+        Rec."Line No." := Line;  // Set the Line No.
     end;
-
 }

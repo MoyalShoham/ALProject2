@@ -5,7 +5,7 @@ table 50102 "Policy Table"
 
     fields
     {
-        field(1; Code; Code[20])
+        field(1; "Policy Code"; Code[20])
         {
             Caption = 'Policy Code';
             DataClassification = ToBeClassified;
@@ -38,24 +38,23 @@ table 50102 "Policy Table"
 
     keys
     {
-        key(PK; Code)
+        key(PK; "Policy Code")
         {
             Clustered = true;
         }
     }
-
 
     trigger OnInsert()
     var
         LastItem: Record "Policy Table";
         NewCode: Code[20];
     begin
-        if Rec."Code" = '' then begin
+        if Rec."Policy Code" = '' then begin
             if LastItem.FindLast then begin
-                NewCode := IncSTR(LastItem."Code");
-                Rec."Code" := NewCode;
+                NewCode := IncSTR(LastItem."Policy Code");
+                Rec."Policy Code" := NewCode;
             end else
-                Rec."Code" := '000001';
+                Rec."Policy Code" := '000001';
         end;
     end;
 }

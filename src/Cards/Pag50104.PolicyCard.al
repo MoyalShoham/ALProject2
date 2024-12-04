@@ -16,7 +16,7 @@ page 50104 "Policy Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Policy Category field.';
                 }
-                field("Code"; Rec."Code")
+                field("Policy Code"; Rec."Policy Code")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Policy Code field.';
@@ -44,18 +44,19 @@ page 50104 "Policy Card"
                 part(CustomerInsurances; "Customer Insurance List")
                 {
                     ApplicationArea = All;
+                    SubPageLink = "Policy Code" = field("Policy Code");
                 }
             }
         }
     }
 
-    trigger OnOpenPage()
-    var
-        CustomerInsuranceListPage: Page "Customer Insurance List";
-        CustomerInsuranceRec: Record "Customer Insurance";
-    begin
-        // Filter the Customer Insurance List by the Policy Code of the current Policy
-        CustomerInsuranceRec.SetRange("Policy Code", Rec."Code");
-        CustomerInsuranceListPage.SetTableView(CustomerInsuranceRec);  // Apply the filter dynamically
-    end;
+    // trigger OnOpenPage()
+    // var
+    //     CustomerInsuranceListPage: Page "Customer Insurance List";
+    //     CustomerInsuranceRec: Record "Customer Insurance";
+    // begin
+    //     // Filter the Customer Insurance List by the Policy Code of the current Policy
+    //     CustomerInsuranceRec.SetRange("Policy Code", Rec."Policy Code");
+    //     CustomerInsuranceListPage.SetTableView(CustomerInsuranceRec);  // Apply the filter dynamically
+    // end;
 }
