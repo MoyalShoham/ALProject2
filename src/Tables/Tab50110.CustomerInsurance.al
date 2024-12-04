@@ -14,6 +14,7 @@ table 50110 "Customer Insurance"
         field(2; "Line No."; Integer)
         {
             Caption = 'Line No.';
+            Editable = false;
             DataClassification = ToBeClassified;
         }
 
@@ -37,32 +38,31 @@ table 50110 "Customer Insurance"
             trigger OnValidate()
             var
                 PolicyRec: Record "Policy Table";
-                PeriodText: Text[10];
+                PeriodInDays: Integer;
             begin
                 // Ensure Start Date is valid
                 if Rec."Start Date" <> 0D then begin
                     // Find the policy record related to the given Policy Code
                     if PolicyRec.Get(Rec."Policy Code") then begin
-                        // Debugging: Print the Period value from Policy Table
-                        Message('Retrieved Period from Policy Table: %1', PolicyRec.Period);
-
                         // Ensure the Period value is greater than zero
                         if PolicyRec.Period > 0 then begin
-                            // Use the Period value from the Policy Table
-                            PeriodText := Format(PolicyRec.Period) + 'D';
-                            // Calculate the End Date based on Start Date and Period
-                            Rec."End Date" := CALCDATE(PeriodText, Rec."Start Date");
+                            // Convert Period (in years) to days (365 days per year)
+                            PeriodInDays := PolicyRec.Period * 365;
+
+                            // Calculate the End Date based on Start Date and Period in days
+                            Rec."End Date" := CALCDATE('+' + Format(PeriodInDays) + 'D', Rec."Start Date");
                         end else begin
                             Error('Period from Policy Table should be greater than zero.');
                         end;
                     end else begin
-                        Error('Policy not found for Code: %1', Rec."Policy Code");
+                        Error('Policy not found for Code: %1', Rec."Policy Code");  // Improved error message
                     end;
                 end else begin
                     Error('Start Date cannot be empty.');
                 end;
             end;
         }
+
 
         field(6; "End Date"; Date)
         {
@@ -84,4 +84,24 @@ table 50110 "Customer Insurance"
             Clustered = true;
         }
     }
+
+    trigger OnInsert()
+    var
+        LastCustomerInsuranceRec: Record "Customer Insurance";
+        Line: Integer;
+    begin
+        // Filter records by the current Policy Code
+        LastCustomerInsuranceRec.SetRange("Policy Code", Rec."Policy Code");
+
+        // Find the last record for the given Policy Code
+        if LastCustomerInsuranceRec.FindLast() then
+            // If a record is found, set the Line No. to the last record's Line No. + 1
+            Line := LastCustomerInsuranceRec."Line No." + 1
+        else
+            // If no records exist for this Policy Code, start from 0
+            Line := 0;
+
+        Rec."Line No." := Line;
+    end;
+
 }

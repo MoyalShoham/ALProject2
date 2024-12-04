@@ -37,27 +37,25 @@ page 50104 "Policy Card"
                     ToolTip = 'Specifies the value of the Policy Price field.';
                 }
             }
-        }
-    }
 
-    actions
-    {
-        area(Navigation)
-        {
-            action(OpenCustomerInsurances)
+            group(Lines)
             {
-                Caption = 'View Customer Insurances';
-                trigger OnAction()
-                var
-                    CustomerInsuranceListPage: Page "Customer Insurance List";
-                    CustomerInsuranceRec: Record "Customer Insurance";
-                begin
-                    // Set filter on the "Customer Insurance" record before opening the page
-                    CustomerInsuranceRec.SetRange("Policy Code", Rec."Code");  // Filter on Policy Code
-                    CustomerInsuranceListPage.SetTableView(CustomerInsuranceRec);  // Set the table view for the list page
-                    CustomerInsuranceListPage.RunModal();  // Open the page
-                end;
+                Caption = 'Lines';
+                part(CustomerInsurances; "Customer Insurance List")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }
+
+    trigger OnOpenPage()
+    var
+        CustomerInsuranceListPage: Page "Customer Insurance List";
+        CustomerInsuranceRec: Record "Customer Insurance";
+    begin
+        // Filter the Customer Insurance List by the Policy Code of the current Policy
+        CustomerInsuranceRec.SetRange("Policy Code", Rec."Code");
+        CustomerInsuranceListPage.SetTableView(CustomerInsuranceRec);  // Apply the filter dynamically
+    end;
 }
