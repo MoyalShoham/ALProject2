@@ -50,13 +50,4 @@ page 50104 "Policy Card"
         }
     }
 
-    // trigger OnOpenPage()
-    // var
-    //     CustomerInsuranceListPage: Page "Customer Insurance List";
-    //     CustomerInsuranceRec: Record "Customer Insurance";
-    // begin
-    //     // Filter the Customer Insurance List by the Policy Code of the current Policy
-    //     CustomerInsuranceRec.SetRange("Policy Code", Rec."Policy Code");
-    //     CustomerInsuranceListPage.SetTableView(CustomerInsuranceRec);  // Apply the filter dynamically
-    // end;
 }

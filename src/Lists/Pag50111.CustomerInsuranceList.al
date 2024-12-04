@@ -65,14 +65,4 @@ page 50111 "Customer Insurance List"
         }
     }
 
-    // trigger OnOpenPage()
-    // var
-    //     CustomerInsuranceRec: Record "Customer Insurance";
-    // begin
-    //     // Filter Customer Insurance records by the current Policy Code
-    //     CustomerInsuranceRec.SetRange("Policy Code", Rec."Policy Code");
-
-    //     // Apply the filter dynamically on the page
-    //     CurrPage.SetTableView(CustomerInsuranceRec);
-    // end;
 }

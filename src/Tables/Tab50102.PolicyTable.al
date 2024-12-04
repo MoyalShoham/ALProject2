@@ -57,4 +57,18 @@ table 50102 "Policy Table"
                 Rec."Policy Code" := '000001';
         end;
     end;
+
+    trigger OnDelete()
+    var
+        CustomerInsuranceRec: Record "Customer Insurance";
+    begin
+        // Find all Customer Insurance records related to the Policy Code
+        CustomerInsuranceRec.SetRange("Policy Code", Rec."Policy Code");
+
+        // Delete all the Customer Insurance records for this Policy Code
+        if CustomerInsuranceRec.FindSet() then
+            repeat
+                CustomerInsuranceRec.Delete(true); // Delete the record
+            until CustomerInsuranceRec.Next() = 0;
+    end;
 }

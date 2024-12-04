@@ -45,7 +45,7 @@ table 50110 "Customer Insurance"
                     if PolicyRec.Get(Rec."Policy Code") then begin
                         // Ensure the Period value is greater than zero
                         if PolicyRec.Period > 0 then begin
-                            // Using CalcDate function to add the period (in days) to the Start Date
+                            // Use the CalcDate function to add the period (in days) to the Start Date
                             Rec."End Date" := CalcDate('+%1D', Rec."Start Date" + PolicyRec.Period);
                         end else begin
                             // If the period is zero or invalid
@@ -59,8 +59,8 @@ table 50110 "Customer Insurance"
                     // If Start Date is not set
                     Error('Start Date cannot be empty.');
                 end;
-
             end;
+
         }
 
         field(6; "End Date"; Date)

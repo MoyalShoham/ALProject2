@@ -17,6 +17,4 @@ tableextension 50102 "EXT Item Table" extends "Item"
             CalcFormula = lookup("Policy Table"."Description" where("Policy Code" = field(PolicyType)));
         }
     }
-
-
 }
