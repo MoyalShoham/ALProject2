@@ -47,6 +47,7 @@ pageextension 50105 "EXT Sales Order Policy" extends "Sales Order"
                 end;
             }
         }
+
     }
 
     // Local function to return the Policy Type for an Item
