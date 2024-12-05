@@ -13,6 +13,12 @@ page 50106 "Policy List"
         {
             repeater(General)
             {
+                field("Policy Code"; Rec."Policy Code")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Policy Code field.', Comment = '%';
+                }
+
                 field(Category; Rec.Category)
                 {
                     ApplicationArea = All;

@@ -10,12 +10,16 @@ pageextension 50105 "EXT Sales Order Policy" extends "Sales Order"
                 Image = Insurance;
                 ApplicationArea = All;
 
+
+
+
+
                 trigger OnAction()
                 var
                     SalesLine: Record "Sales Line";
-                    PolicyTable: Record "Policy Table";
+                    Item: Record Item; // Add Item record to fetch policy info from Item
                     CustomerInsurance: Record "Customer Insurance";
-                    PolicyType: Code[20];
+                    PolicyCode: Code[20];
                 begin
                     // Iterate through all Sales Line items in the current Sales Order
                     SalesLine.SetRange("Document Type", Rec."Document Type");
@@ -24,14 +28,15 @@ pageextension 50105 "EXT Sales Order Policy" extends "Sales Order"
 
                     if SalesLine.FindSet() then
                         repeat
-                            // Check if the item has a PolicyType (policy linked)
-                            PolicyType := ReturnPolicyTypeForItem(SalesLine."No.");
+                            // Fetch the Policy Code from the Item record
+                            if Item.Get(SalesLine."No.") then
+                                PolicyCode := Item."Policy Code"; // Get the Policy Code from Item record
 
-                            // If the item has a linked PolicyType
-                            if PolicyType <> '' then begin
+                            // If the item has a linked PolicyCode
+                            if PolicyCode <> '' then begin
                                 // Create a new Customer Insurance line
                                 CustomerInsurance.Init();
-                                CustomerInsurance."Policy Code" := PolicyType;
+                                CustomerInsurance."Policy Code" := PolicyCode;
                                 CustomerInsurance."Customer No." := Rec."Sell-to Customer No."; // Customer from Sales Order
                                 CustomerInsurance."Start Date" := Rec."Order Date"; // Start Date from Sales Order
 
@@ -43,21 +48,10 @@ pageextension 50105 "EXT Sales Order Policy" extends "Sales Order"
                             end;
                         until SalesLine.Next() = 0;
 
-                    Message('Policy lines added for items with policy types.');
+                    Message('Policy lines added for items with policy codes.');
                 end;
             }
         }
 
     }
-
-    // Local function to return the Policy Type for an Item
-    local procedure ReturnPolicyTypeForItem(ItemNo: Code[20]): Code[20]
-    var
-        Item: Record Item;
-    begin
-        // Check if the Item has a linked PolicyType
-        if Item.Get(ItemNo) then
-            exit(Item.PolicyType); // Return the Policy Type linked to the Item
-        exit(''); // Return an empty string if no Policy Type is linked
-    end;
 }

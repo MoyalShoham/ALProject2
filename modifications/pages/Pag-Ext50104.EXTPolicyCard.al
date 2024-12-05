@@ -1,13 +1,13 @@
-pageextension 50104 "EXT Policy Card" extends "Item Card"
+pageextension 50104 "Item Card Ext" extends "Item Card"
 {
     layout
     {
         addlast(Item)
         {
-            field(PolicyType; Rec.PolicyType)
+            field("Policy Code"; Rec."Policy Code")
             {
                 ApplicationArea = All;
-                Caption = 'Policy Type';
+                Caption = 'Policy Code';
                 ToolTip = 'Select a policy type';
                 TableRelation = "Policy Table"."Policy Code";
             }
