@@ -36,6 +36,7 @@ page 50111 "Customer Insurance List"
                 {
                     ApplicationArea = All;
                 }
+
                 // field("Period"; Rec.Period)
                 // {
                 //     ApplicationArea = All;

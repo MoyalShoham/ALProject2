@@ -74,6 +74,7 @@ table 50110 "Customer Insurance"
             Caption = 'Period (in days)';
             DataClassification = ToBeClassified;
         }
+
     }
 
     keys
