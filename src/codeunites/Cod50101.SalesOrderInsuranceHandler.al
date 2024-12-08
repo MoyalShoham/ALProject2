@@ -1,7 +1,7 @@
 codeunit 50101 "Sales Order Insurance Handler"
 {
     // Subscribe to the OnAfterReleaseSalesDoc event
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Release Sales Document", 'OnAfterReleaseSalesDoc', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Release Sales Document", OnAfterReleaseSalesDoc, '', false, false)]
     procedure OnAfterReleaseSalesOrder(var SalesHeader: Record "Sales Header"; PreviewMode: Boolean; var LinesWereModified: Boolean)
     var
         SalesLine: Record "Sales Line";
@@ -16,6 +16,9 @@ codeunit 50101 "Sales Order Insurance Handler"
             SalesLine.SetRange("Document No.", SalesHeader."No.");
             SalesLine.SetRange(Type, SalesLine.Type::Item); // Only process Item-type Sales Lines
 
+            SalesLine.SetLoadFields("Document Type", "Document No.", "Line No.", Type, "No.");
+            SalesLine.ReadIsolation := IsolationLevel::ReadUncommitted;
+
             if SalesLine.FindSet() then
                 repeat
                     // Ensure the Sales Line is an Item and fetch the Policy Code
@@ -28,7 +31,7 @@ codeunit 50101 "Sales Order Insurance Handler"
                                 CustomerInsurance.Init();
                                 CustomerInsurance."Policy Code" := PolicyCode;
                                 CustomerInsurance."Customer No." := SalesHeader."Sell-to Customer No."; // Customer from Sales Order
-                                CustomerInsurance."Start Date" := SalesHeader."Order Date"; // Use Order Date as Start Date
+                                CustomerInsurance.Validate("Start Date", SalesHeader."Order Date"); // Validate Start Date
 
                                 // Insert the new Customer Insurance record
                                 CustomerInsurance.Insert(true);
