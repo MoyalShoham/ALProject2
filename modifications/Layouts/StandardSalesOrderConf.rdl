@@ -3081,7 +3081,6 @@
                               </TablixRowHierarchy>
                               <DataSetName>DataSet_Result</DataSetName>
                               <Top>0.07056cm</Top>
-                              <Left>0cm</Left>
                               <Height>8.85932cm</Height>
                               <Width>18.07667cm</Width>
                               <Style>
@@ -3723,14 +3722,14 @@
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="PolicyStartDate">
+                                          <Textbox Name="StrStartDate">
                                             <CanGrow>true</CanGrow>
                                             <KeepTogether>true</KeepTogether>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>=Fields!PolicyStartDate.Value</Value>
+                                                    <Value>=Fields!StrStartDate.Value</Value>
                                                     <Style>
                                                       <FontFamily>Segoe UI</FontFamily>
                                                       <FontSize>8pt</FontSize>
@@ -3740,7 +3739,7 @@
                                                 <Style />
                                               </Paragraph>
                                             </Paragraphs>
-                                            <rd:DefaultName>PolicyStartDate</rd:DefaultName>
+                                            <rd:DefaultName>StrStartDate</rd:DefaultName>
                                             <Style>
                                               <Border>
                                                 <Color>LightGrey</Color>
@@ -3754,14 +3753,14 @@
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="PolicyEndDate">
+                                          <Textbox Name="StrEndDate">
                                             <CanGrow>true</CanGrow>
                                             <KeepTogether>true</KeepTogether>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>=Fields!PolicyEndDate.Value</Value>
+                                                    <Value>=Fields!StrEndDate.Value</Value>
                                                     <Style>
                                                       <FontFamily>Segoe UI</FontFamily>
                                                       <FontSize>8pt</FontSize>
@@ -3771,7 +3770,7 @@
                                                 <Style />
                                               </Paragraph>
                                             </Paragraphs>
-                                            <rd:DefaultName>PolicyEndDate</rd:DefaultName>
+                                            <rd:DefaultName>StrEndDate</rd:DefaultName>
                                             <Style>
                                               <Border>
                                                 <Color>LightGrey</Color>
@@ -4054,7 +4053,7 @@
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>=Fields!PolicyStartDate.Value</Value>
+                                                    <Value>=Fields!StrStartDate.Value</Value>
                                                     <Style>
                                                       <FontFamily>Segoe UI</FontFamily>
                                                       <FontSize>8pt</FontSize>
@@ -4078,14 +4077,14 @@
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="Textbox56">
+                                          <Textbox Name="StrEndDate1">
                                             <CanGrow>true</CanGrow>
                                             <KeepTogether>true</KeepTogether>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>=Fields!PolicyEndDate.Value</Value>
+                                                    <Value>=Fields!StrEndDate.Value</Value>
                                                     <Style>
                                                       <FontFamily>Segoe UI</FontFamily>
                                                       <FontSize>8pt</FontSize>
@@ -4095,7 +4094,7 @@
                                                 <Style />
                                               </Paragraph>
                                             </Paragraphs>
-                                            <rd:DefaultName>Textbox56</rd:DefaultName>
+                                            <rd:DefaultName>StrEndDate1</rd:DefaultName>
                                             <Style>
                                               <Border>
                                                 <Color>LightGrey</Color>
@@ -4105,6 +4104,7 @@
                                               <PaddingRight>5pt</PaddingRight>
                                             </Style>
                                           </Textbox>
+                                          <rd:Selected>true</rd:Selected>
                                         </CellContents>
                                       </TablixCell>
                                       <TablixCell>
@@ -4380,7 +4380,6 @@
                               <RepeatRowHeaders>true</RepeatRowHeaders>
                               <DataSetName>DataSet_Result</DataSetName>
                               <Top>9.50577cm</Top>
-                              <Left>0cm</Left>
                               <Height>1.89674cm</Height>
                               <Width>17.36813cm</Width>
                               <ZIndex>1</ZIndex>
@@ -4800,7 +4799,6 @@
                                 </Filter>
                               </Filters>
                               <Top>16.53165cm</Top>
-                              <Left>0cm</Left>
                               <Height>1.55224cm</Height>
                               <Width>10.82042cm</Width>
                               <ZIndex>2</ZIndex>
@@ -5731,7 +5729,6 @@
                                 </Filter>
                               </Filters>
                               <Top>14.6292cm</Top>
-                              <Left>0cm</Left>
                               <Height>1.76418cm</Height>
                               <Width>15.2cm</Width>
                               <ZIndex>3</ZIndex>
@@ -6298,8 +6295,8 @@
                               </Filters>
                               <Top>18.19678cm</Top>
                               <Left>0.02485cm</Left>
-                              <Height>3.63364cm</Height>
-                              <Width>17.34328cm</Width>
+                              <Height>3.63363cm</Height>
+                              <Width>17.34327cm</Width>
                               <ZIndex>4</ZIndex>
                               <Visibility>
                                 <Hidden>=NOT Fields!ShowShippingAddress.Value</Hidden>
